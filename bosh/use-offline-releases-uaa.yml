@@ -1,6 +1,6 @@
 - type: replace
   path: /releases/name=uaa/url
-  value: file://((releases_dir))/bosh/uaa-74.29.0-ubuntu-xenial-621.93-20201130-224014-789299918-20201130224017.tgz
+  value: file://((releases_dir))/bosh/uaa-74.29.0.tgz
 - type: replace
   path: /releases/name=uaa/version
   value: 74.29.0

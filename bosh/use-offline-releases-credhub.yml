@@ -1,6 +1,6 @@
 - type: replace
   path: /releases/name=credhub/url
-  value: file://((releases_dir))/bosh/credhub-2.9.0-ubuntu-xenial-621.93-20201130-223813-836755462-20201130223815.tgz
+  value: file://((releases_dir))/bosh/credhub-2.9.0.tgz
 - type: replace
   path: /releases/name=credhub/version
   value: 2.9.0

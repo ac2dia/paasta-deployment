@@ -1,0 +1,99 @@
+- name: cpi
+  path: /releases/-
+  type: replace
+  value:
+    name: bosh-cloudit-cpi
+    sha1: da1c85a3d04643ad5b780767f655b7e07d9fddec
+    url: file://~/workspace/paasta-5.5.2/release/bosh/bosh-cloudit-cpi.tgz
+    version: "1"
+- name: stemcell
+  path: /resource_pools/name=vms/stemcell?
+  type: replace
+  value:
+    sha1: c6c72b9d87fa90efd47b71a4c450883601933bc5
+    url: file://~/workspace/paasta-5.5.2/stemcell/bosh/bosh-stemcell-621.93-cloudit-qemu-ubuntu-xenial-go_agent.tgz
+- path: /resource_pools/name=vms/cloud_properties?
+  type: replace
+  value:
+    instance_type: m1.xlarge    
+- path: /networks/name=default/subnets/0/cloud_properties?
+  type: replace
+  value:
+    net_id: ((net_id))
+- path: /instance_groups/name=bosh/jobs/-
+  type: replace
+  value:
+    name: registry
+    release: bosh
+- path: /instance_groups/name=bosh/properties/registry?
+  type: replace
+  value:
+    address: ((internal_ip))
+    db:
+      adapter: postgres
+      database: bosh
+      host: 127.0.0.1
+      password: ((postgres_password))
+      user: postgres
+    endpoint: http://registry:((registry_password))@((internal_ip)):25777
+    host: ((internal_ip))
+    password: ((registry_password))
+    port: 25777
+    username: registry
+- path: /instance_groups/name=bosh/jobs/-
+  type: replace
+  value:
+    name: cloudit_cpi
+    release: bosh-cloudit-cpi
+- path: /instance_groups/name=bosh/properties/director/cpi_job?
+  type: replace
+  value: cloudit_cpi
+- path: /cloud_provider/template?
+  type: replace
+  value:
+    name: cloudit_cpi
+    release: bosh-cloudit-cpi
+- path: /instance_groups/name=bosh/properties/cloudit?
+  type: replace
+  value:
+    service_endpoint: ((service_endpoint))
+    creator: ((creator))
+    password: ((password))
+    tenant_id: ((tenant_id))
+    pool_id: ((pool_id))
+    cluster_id: ((cluster_id))
+    network_address: ((network_address))
+    network_name: ((network_name))
+    static_ip: ((internal_ip))
+    default_key_name: ((default_key_name))
+    default_security_groups: ((default_security_groups))
+- path: /cloud_provider/ssh_tunnel?
+  type: replace
+  value:
+    host: ((internal_ip))
+    port: 22
+    private_key: ((private_key))
+    user: vcap
+- path: /cloud_provider/properties/cloudit?
+  type: replace
+  value:
+    service_endpoint: ((service_endpoint))
+    creator: ((creator))
+    password: ((password))
+    tenant_id: ((tenant_id))
+    pool_id: ((pool_id))
+    cluster_id: ((cluster_id))
+    network_address: ((network_address))
+    network_name: ((network_name))
+    static_ip: ((internal_ip))
+    default_key_name: ((default_key_name))
+    default_security_groups: ((default_security_groups))
+    director_name: ((director_name))
+    net_id: ((net_id))
+    os: ((os))
+    arch: ((arch))
+- path: /variables/-
+  type: replace
+  value:
+    name: registry_password
+    type: passwor

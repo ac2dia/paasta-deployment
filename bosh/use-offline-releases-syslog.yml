@@ -1,0 +1,9 @@
+\- type: replace
+  path: /releases/name=syslog/url
+  value: file://((releases_dir))/bosh/syslog-release-11.6.1.tgz
+- type: replace
+  path: /releases/name=syslog/version
+  value: 11.6.1
+- type: replace
+  path: /releases/name=syslog/sha1
+  value: e2649e48c49aedcbd0ff96b00f56b028682f1dd6
