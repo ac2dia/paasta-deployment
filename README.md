@@ -1,8 +1,3 @@
-## 💥 🚨 💥 Notice 💥 🚨 💥
-#### 릴리즈의 경로가 http://45.248.73.44/ 에서 https://nextcloud.paas-ta.org/ 로 변경되었습니다  
-#### paasta-deployment 5.5.0 이하의 버전을 사용할 경우 <br>
-#### 해당 경로를 https://nextcloud.paas-ta.org/~ 로 변경이 필요합니다.
-
 ## PaaS-TA Deployment
 
 - [Bosh 및 PaaS-TA 설치 가이드](https://github.com/PaaS-TA/Guide/tree/v5.5.2)
@@ -25,6 +20,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/hsohans"><img src="https://avatars.githubusercontent.com/u/51317201?v=4?s=100" width="100px;" alt=""/><br /><sub><b>hsohans</b></sub></a><br /><a href="https://github.com/PaaS-TA/paasta-deployment/commits?author=hsohans" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/ac2dia"><img src="https://avatars.githubusercontent.com/u/69203824?s=400&v=4" width="100px;" alt=""/><br /><sub><b>ac2dia</b></sub></a><br /><a href="https://github.com/ac2dia/paasta-deployment/commits?author=ac2dia" title="Code">💻</a></td>
   </tr>
 </table>
 
