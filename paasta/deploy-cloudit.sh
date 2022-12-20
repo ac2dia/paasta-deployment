@@ -4,10 +4,10 @@ BOSH_ENVIRONMENT="${BOSH_ENVIRONMENT}"			 # bosh director alias name (PaaS-TA에
 
 bosh -e ${BOSH_ENVIRONMENT} -d paasta -n deploy paasta-deployment.yml \
 	-o operations/cloudit.yml \
-	-o operations/use-haproxy.yml \
+	-o operations/use-offline-releases-haproxy.yml \
 	-o operations/use-haproxy-public-network.yml \
-	-o operations/use-postgres.yml \
-	-o operations/cce.yml \
+	-o operations/use-offline-releases-postgres.yml \
+	-o operations/use-offline-releases-cce.yml \
 	-o operations/rename-network-and-deployment.yml \
 	-l vars.yml \
-	-l /root/workspace/paasta-5.5.2/deployment/common/common_vars_latest.yml > deploy.manifes
+	-l /home/ubuntu/workspace/paasta-5.5.2/deployment/common/common_vars.yml > deploy.manifest
