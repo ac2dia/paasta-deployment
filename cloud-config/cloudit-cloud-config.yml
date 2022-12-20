@@ -2,24 +2,6 @@ azs:
 - name: z1
   cloud_properties:
     availability_zone: nova
-- name: z2
-  cloud_properties:
-    availability_zone: nova
-- name: z3
-  cloud_properties:
-    availability_zone: nova
-- name: z4
-  cloud_properties:
-    availability_zone: nova
-- name: z5
-  cloud_properties:
-    availability_zone: nova
-- name: z6
-  cloud_properties:
-    availability_zone: nova
-- name: z7
-  cloud_properties:
-    availability_zone: nova
 
 vm_types:
 - name: minimal
@@ -79,7 +61,7 @@ compilation:
   network: default
   reuse_compilation_vms: true
   vm_type: large
-  workers: 5
+  workers: 3
 
 disk_types:
 - disk_size: 1024
@@ -125,107 +107,28 @@ disk_types:
 
 networks:
 - name: default
+  type: manual
   subnets:
   - az: z1
     cloud_properties:
-      name: random
-      net_id: 657712d9-1948-4e6b-96fb-d6164a530dff
+      name: 192.168.120.0
+      net_id: a2ac14b9-2e90-4bae-83aa-f5f3bb54f53e
+      network_address: 192.168.120.0
+      network_name: "EXTERNAL0"
       security_groups:
-      - paasta2
+      - ALL
     dns:
     - 8.8.8.8
-    gateway: 10.0.1.1
-    range: 10.0.1.0/24
-    reserved:
-    - 10.0.1.1 - 10.0.1.9
-    static:
-    - 10.0.1.10 - 10.0.1.120
-  - az: z2
-    cloud_properties:
-      name: random
-      net_id: 657712d9-1948-4e6b-96fb-d6164a530dff
-      security_groups:
-      - paasta2
-    dns:
-    - 8.8.8.8
-    gateway: 10.0.41.1
-    range: 10.0.41.0/24
-    reserved:
-    - 10.0.41.1 - 10.0.41.9
-    static:
-    - 10.0.41.10 - 10.0.41.120
-  - az: z3
-    cloud_properties:
-      name: random
-      net_id: 657712d9-1948-4e6b-96fb-d6164a530dff
-      security_groups:
-      - paasta2
-    dns:
-    - 8.8.8.8
-    gateway: 10.0.81.1
-    range: 10.0.81.0/24
-    reserved:
-    - 10.0.81.1 - 10.0.81.9
-    static:
-    - 10.0.81.10 - 10.0.81.120
-  - az: z4
-    cloud_properties:
-      name: random
-      net_id: 657712d9-1948-4e6b-96fb-d6164a530dff
-      security_groups:
-      - paasta2
-    dns:
-    - 8.8.8.8
-    gateway: 10.0.121.1
-    range: 10.0.121.0/24
-    reserved:
-    - 10.0.121.1 - 10.0.121.9
-    static:
-    - 10.0.121.10 - 10.0.121.120
-  - az: z5
-    cloud_properties:
-      name: random
-      net_id: 657712d9-1948-4e6b-96fb-d6164a530dff
-      security_groups:
-      - paasta2
-    dns:
-    - 8.8.8.8
-    gateway: 10.0.161.1
-    range: 10.0.161.0/24
-    reserved:
-    - 10.0.161.1 - 10.0.161.9
-    static:
-    - 10.0.161.10 - 10.0.161.120
-  - az: z6
-    cloud_properties:
-      name: random
-      net_id: 657712d9-1948-4e6b-96fb-d6164a530dff
-      security_groups:
-      - paasta2
-    dns:
-    - 8.8.8.8
-    gateway: 10.0.201.1
-    range: 10.0.201.0/24
-    reserved:
-    - 10.0.201.1 - 10.0.201.9
-    static:
-    - 10.0.201.10 - 10.0.201.120
-  - az: z7
-    cloud_properties:
-      name: random
-      net_id: 657712d9-1948-4e6b-96fb-d6164a530dff
-      security_groups:
-      - paasta2
-    dns:
-    - 8.8.8.8
-    gateway: 10.0.0.1
-    range: 10.0.0.0/24
-    reserved:
-    - 10.0.0.1 - 10.0.0.9
-    static:
-    - 10.0.0.10 - 10.0.0.120
-  
-- name: vip 
+    gateway: 192.168.120.254
+    range: 192.168.120.0/24
+    reserved: # Cloudit V5.0 에서 사용하지 않는 대역
+    - 192.168.120.1 - 192.168.120.9
+    - 192.168.120.51 - 192.168.120.254
+    static: # VM 배포시 고정 IP 를 부여하는 경우 사용하는 대역
+    - 192.168.120.11 - 192.168.120.15
+    - 192.168.120.30 - 192.168.120.30
+
+- name: vip
   type: vip
 
 vm_extensions:
@@ -246,4 +149,11 @@ vm_extensions:
     ephemeral_disk:
       size: 102400
       type: gp2
-  name: small-highmem-100GB 
+  name: small-highmem-100GB
+- name: ssh-proxy-and-router-lb
+  cloud_properties:
+    ports:
+    - host: 80
+    - host: 443
+    - host: 2222
+    - host: 4443
